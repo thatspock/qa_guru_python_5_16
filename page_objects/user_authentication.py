@@ -146,7 +146,7 @@ class UserAuthentication:
     def enter_account_information(self, admin: User):
         self.should_be_visible_enter_account_information()
         self.pick_gender()
-        self.fill_in_password()
+        self.fill_in_password(admin.password)
         self.fill_in_date_of_birth(admin.date_of_birth)
         self.select_checkbox_newsletter()
         self.select_checkbox_offers()
