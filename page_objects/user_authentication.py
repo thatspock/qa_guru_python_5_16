@@ -64,9 +64,13 @@ class UserAuthentication:
     def pick_gender(self):
         self.browser.element('#uniform-id_gender1').click()
 
-    @allure.step('Filling in password field.')
-    def fill_in_password(self, value):
+    @allure.step('Create password.')
+    def create_password(self, value):
         self.browser.element('#password').type(value)
+
+    @allure.step('Filling in password field.')
+    def fill_in_login_password(self, value):
+        self.browser.element('input[data-qa="login-password"]').type(value)
 
     @allure.step('Filling in date of birth.')
     def fill_in_date_of_birth(self, date_of_birth):
@@ -146,7 +150,7 @@ class UserAuthentication:
     def enter_account_information(self, admin: User):
         self.should_be_visible_enter_account_information()
         self.pick_gender()
-        self.fill_in_password(admin.password)
+        self.create_password(admin.password)
         self.fill_in_date_of_birth(admin.date_of_birth)
         self.select_checkbox_newsletter()
         self.select_checkbox_offers()
@@ -169,7 +173,7 @@ class UserAuthentication:
         self.click_auth_link()
         self.should_be_visible_signin_form()
         self.fill_in_email(admin.email)
-        self.fill_in_password(admin.password)
+        self.fill_in_login_password(admin.password)
         self.click_signin_button()
 
     @allure.step('Deleting the account.')
