@@ -56,14 +56,6 @@ class UserAuthentication:
         self.fill_in_email(admin.email)
         self.click_signup_button()
 
-    @allure.step('Signing in an user.')
-    def signin_user(self, admin: User):
-        self.click_auth_link()
-        self.should_be_visible_signin_form()
-        self.fill_in_email(admin.email)
-        self.fill_in_password(admin.password)
-        self.click_signin_button()
-
     @allure.step('Checking if the account information entry form is visible.')
     def should_be_visible_enter_account_information(self):
         self.browser.element('#form').should(have.text('ENTER ACCOUNT INFORMATION'))
@@ -73,8 +65,8 @@ class UserAuthentication:
         self.browser.element('#uniform-id_gender1').click()
 
     @allure.step('Filling in password field.')
-    def fill_in_password(self):
-        self.browser.element('#password').type('qwerty')
+    def fill_in_password(self, value):
+        self.browser.element('#password').type(value)
 
     @allure.step('Filling in date of birth.')
     def fill_in_date_of_birth(self, date_of_birth):
@@ -171,6 +163,14 @@ class UserAuthentication:
         self.should_be_visible_account_created()
         self.click_continue_button()
         self.close_ad_if_present(admin.login)
+
+    @allure.step('Signing in an user.')
+    def signin_user(self, admin: User):
+        self.click_auth_link()
+        self.should_be_visible_signin_form()
+        self.fill_in_email(admin.email)
+        self.fill_in_password(admin.password)
+        self.click_signin_button()
 
     @allure.step('Deleting the account.')
     def delete_account(self):
