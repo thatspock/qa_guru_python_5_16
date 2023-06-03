@@ -38,8 +38,11 @@ class UserAuthentication:
         self.browser.element('input[data-qa="signup-name"]').type(value)
 
     @allure.step('Filling in email field.')
-    def fill_in_email(self, value):
+    def fill_in_email_signup(self, value):
         self.browser.element('input[data-qa="signup-email"]').type(value)
+
+    def fill_in_email_signin(self, value):
+        self.browser.element('input[data-qa="login-email"]').type(value)
 
     @allure.step('Clicking the signup button.')
     def click_signup_button(self):
@@ -53,7 +56,7 @@ class UserAuthentication:
         self.click_auth_link()
         self.should_be_visible_signup_form()
         self.fill_in_login(admin.login)
-        self.fill_in_email(admin.email)
+        self.fill_in_email_signup(admin.email)
         self.click_signup_button()
 
     @allure.step('Checking if the account information entry form is visible.')
@@ -172,7 +175,7 @@ class UserAuthentication:
     def signin_user(self, admin: User):
         self.click_auth_link()
         self.should_be_visible_signin_form()
-        self.fill_in_email(admin.email)
+        self.fill_in_email_signin(admin.email)
         self.fill_in_login_password(admin.password)
         self.click_signin_button()
 
