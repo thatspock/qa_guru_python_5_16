@@ -1,4 +1,5 @@
 import dataclasses
+import os
 
 
 @dataclasses.dataclass
@@ -21,7 +22,7 @@ class User:
 admin = User(
     login='mrspock',
     email='mrspock18@enterprise.com',
-    password='aloha',
+    password=os.getenv('USER_PASSWORD'),
     date_of_birth=['13', '5', '1985'],
     first_name='Mr',
     last_name='Spock',
