@@ -2,3 +2,5 @@ pytest
 selene==2.0.0rc2
 selenium
 allure-pytest
+requests~=2.30.0
+python-dotenv==1.0.0
