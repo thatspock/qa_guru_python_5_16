@@ -11,6 +11,7 @@ class User:
     last_name: str
     company: str
     address: str
+    country: str
     state: str
     city: str
     zip_code: str
@@ -19,13 +20,14 @@ class User:
 
 admin = User(
     login='mrspock',
-    email='mrspock1@enterprise.com',
+    email='mrspock18@enterprise.com',
     password='aloha',
     date_of_birth=['13', '5', '1985'],
     first_name='Mr',
     last_name='Spock',
     company='Enterprise',
     address='Market street 13',
+    country='Australia',
     state='NSW',
     city='Sydney',
     zip_code='2000',
