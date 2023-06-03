@@ -36,7 +36,7 @@ class UserSignUp:
 
     @allure.step('Signing up a new user.')
     def signup_new_user(self, admin: User):
-        self.should_be_visible_signup_form()
+        self.should_be_visible_home_page()
         self.click_signup_link()
         self.should_be_visible_signup_form()
         self.fill_in_login(admin.login)
