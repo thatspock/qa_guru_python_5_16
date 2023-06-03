@@ -1,0 +1,17 @@
+{
+  "base": {
+    "project": "Telegram Notifications",
+    "environment": "some env",
+    "comment": "Project deployment was successful and all test cases have passed.",
+    "reportLink": "",
+    "language": "en",
+    "messenger": "telegram",
+    "allureFolder": "allure-report/",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "6010220385:AAH0eJMCtaYR6nagOC8xCLQQfwGZUkkiR5o",
+    "chat": "-1001944728224",
+    "replyTo": ""
+  }
+}
