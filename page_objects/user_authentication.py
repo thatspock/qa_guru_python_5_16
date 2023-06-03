@@ -4,7 +4,7 @@ from data.users import User
 from tests.constants import URL
 
 
-class UserSignUp:
+class UserAuthentication:
     def __init__(self, browser):
         self.browser = browser
 
@@ -16,13 +16,22 @@ class UserSignUp:
     def should_be_visible_home_page(self):
         self.browser.element('.shop-menu').should(have.text('Home'))
 
-    @allure.step('Clicking the signup link.')
-    def click_signup_link(self):
+    @allure.step('Opening the home page and verifying it is visible.')
+    def open_and_verify_home_page(self):
+        self.open()
+        self.should_be_visible_home_page()
+
+    @allure.step('Clicking the Signup/Login link.')
+    def click_auth_link(self):
         self.browser.element('.fa-lock').click()
 
     @allure.step('Checking if the signup form is visible.')
     def should_be_visible_signup_form(self):
         self.browser.element('.signup-form').should(have.text('New User Signup!'))
+
+    @allure.step('Checking if the login form is visible.')
+    def should_be_visible_signin_form(self):
+        self.browser.element('.login-form').should(have.text('Login to your account'))
 
     @allure.step('Filling in login field.')
     def fill_in_login(self, value):
@@ -36,14 +45,24 @@ class UserSignUp:
     def click_signup_button(self):
         self.browser.element('button[data-qa="signup-button"]').click()
 
+    def click_signin_button(self):
+        self.browser.element('button[data-qa="login-button"]').click()
+
     @allure.step('Signing up a new user.')
     def signup_new_user(self, admin: User):
-        self.should_be_visible_home_page()
-        self.click_signup_link()
+        self.click_auth_link()
         self.should_be_visible_signup_form()
         self.fill_in_login(admin.login)
         self.fill_in_email(admin.email)
         self.click_signup_button()
+
+    @allure.step('Signing in an user.')
+    def signin_user(self, admin: User):
+        self.click_auth_link()
+        self.should_be_visible_signin_form()
+        self.fill_in_email(admin.email)
+        self.fill_in_password(admin.password)
+        self.click_signin_button()
 
     @allure.step('Checking if the account information entry form is visible.')
     def should_be_visible_enter_account_information(self):
@@ -152,7 +171,6 @@ class UserSignUp:
         self.should_be_visible_account_created()
         self.click_continue_button()
         self.close_ad_if_present(admin.login)
-        self.should_be_visible_login(admin.login)
 
     @allure.step('Deleting the account.')
     def delete_account(self):
