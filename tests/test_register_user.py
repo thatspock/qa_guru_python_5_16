@@ -11,8 +11,9 @@ from tests.constants import URL
 @allure.severity(Severity.CRITICAL)
 @allure.label('owner', 'mr spock')
 @allure.link(URL, name='Testing')
-def test_register_user():
-    user_signup = UserSignUp()
+def test_register_user(browser_management):
+    browser = browser_management
+    user_signup = UserSignUp(browser)
 
     user_signup.open()
     user_signup.signup_new_user(admin)
