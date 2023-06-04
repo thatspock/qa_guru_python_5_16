@@ -180,6 +180,7 @@ class UserAuthentication:
         self.fill_in_email_signin(user.email)
         self.fill_in_login_password(user.password)
         self.click_signin_button()
+        self.close_ad_if_present(user.login)
 
     @allure.step('Deleting the account.')
     def delete_account(self):
