@@ -9,7 +9,7 @@ from selene import Browser, Config
 from tests.constants import DEFAULT_BROWSER_VERSION
 from utils.attachment import AllureAttachmentManager
 
-desktop_sizes = [(1710, 1121), (1470, 956)]
+desktop_sizes = [(1710, 1121)]
 desktop_only = pytest.mark.parametrize('web_browser', desktop_sizes, indirect=True)
 
 

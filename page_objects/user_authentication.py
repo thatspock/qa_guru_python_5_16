@@ -150,6 +150,9 @@ class UserAuthentication:
     def should_be_visible_login(self, value):
         self.browser.element('#header').should(have.text(value))
 
+    def scroll_bottom(self):
+        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
     @allure.step('Entering account information.')
     def enter_account_information(self, user: User):
         self.should_be_visible_enter_account_information()
@@ -166,6 +169,7 @@ class UserAuthentication:
         self.fill_in_state(user.state)
         self.fill_in_city(user.city)
         self.fill_in_zip_code(user.zip_code)
+        self.scroll_bottom()
         self.fill_in_mobile_number(user.mobile_number)
         self.click_button_create_account()
         self.should_be_visible_account_created()
