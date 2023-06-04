@@ -1,7 +1,7 @@
 import allure
 import pytest
 from allure_commons.types import Severity
-from data.users import admin, users
+from data.users import users
 from page_objects.user_authentication import UserAuthentication
 
 from tests.constants import URL, USER_IDS

@@ -1,5 +1,4 @@
 import allure
-import pytest
 from selene import have
 from data.users import User
 from tests.constants import URL
