@@ -172,7 +172,6 @@ class UserAuthentication:
         self.click_continue_button()
         self.close_ad_if_present(user.login)
 
-    # @pytest.mark.parametrize
     @allure.step('Signing in an user.')
     def signin_user(self, user: User):
         self.click_auth_link()
