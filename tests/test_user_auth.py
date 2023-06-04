@@ -4,7 +4,7 @@ from allure_commons.types import Severity
 from data.users import admin, users
 from page_objects.user_authentication import UserAuthentication
 
-from tests.constants import URL
+from tests.constants import URL, USER_IDS
 
 
 @allure.tag('Test Case 1')
@@ -12,7 +12,7 @@ from tests.constants import URL
 @allure.severity(Severity.CRITICAL)
 @allure.label('owner', 'mr spock')
 @allure.link(URL, name='Automation Exercise')
-@pytest.mark.parametrize('user', users)
+@pytest.mark.parametrize('user', users, ids=USER_IDS)
 def test_register_user(browser_management, user):
     browser = browser_management
     user_signup = UserAuthentication(browser)
@@ -28,7 +28,7 @@ def test_register_user(browser_management, user):
 @allure.severity(Severity.CRITICAL)
 @allure.label('owner', 'mr spock')
 @allure.link(URL, name='Automation Exercise')
-@pytest.mark.parametrize('user', users)
+@pytest.mark.parametrize('user', users, ids=USER_IDS)
 def test_login_with_correct_credentials(browser_management, user):
     browser = browser_management
     user_login = UserAuthentication(browser)
