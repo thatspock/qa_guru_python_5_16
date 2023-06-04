@@ -9,6 +9,9 @@ from selene import Browser, Config
 from tests.constants import DEFAULT_BROWSER_VERSION
 from utils.attachment import AllureAttachmentManager
 
+desktop_sizes = [(1710, 1121), (1470, 956)]
+desktop_only = pytest.mark.parametrize('web_browser', desktop_sizes, indirect=True)
+
 
 def pytest_addoption(parser):
     parser.addoption(
@@ -22,7 +25,7 @@ def load_env():
     load_dotenv()
 
 
-@pytest.fixture(scope='function', autouse=True)
+@pytest.fixture(params=desktop_sizes, scope='function', autouse=True)
 def browser_management(request):
     browser_version = request.config.getoption('--browser-version')
     browser_version = browser_version if browser_version != "" else DEFAULT_BROWSER_VERSION
@@ -46,6 +49,9 @@ def browser_management(request):
         options=options)
 
     browser = Browser(Config(driver=driver))
+
+    browser.config.window_height = request.param[1]
+    browser.config.window_width = request.param[0]
 
     yield browser
 
