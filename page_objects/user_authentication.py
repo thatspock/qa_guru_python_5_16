@@ -1,5 +1,7 @@
 import allure
 from selene import have
+from selenium.common import NoSuchElementException
+
 from data.users import User
 from tests.constants import URL
 
