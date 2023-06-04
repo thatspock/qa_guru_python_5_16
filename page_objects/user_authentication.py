@@ -1,4 +1,5 @@
 import allure
+import pytest
 from selene import have
 from data.users import User
 from tests.constants import URL
@@ -48,15 +49,16 @@ class UserAuthentication:
     def click_signup_button(self):
         self.browser.element('button[data-qa="signup-button"]').click()
 
+    @allure.step('Clicking the signin button.')
     def click_signin_button(self):
         self.browser.element('button[data-qa="login-button"]').click()
 
     @allure.step('Signing up a new user.')
-    def signup_new_user(self, admin: User):
+    def signup_new_user(self, user: User):
         self.click_auth_link()
         self.should_be_visible_signup_form()
-        self.fill_in_login(admin.login)
-        self.fill_in_email_signup(admin.email)
+        self.fill_in_login(user.login)
+        self.fill_in_email_signup(user.email)
         self.click_signup_button()
 
     @allure.step('Checking if the account information entry form is visible.')
@@ -150,33 +152,34 @@ class UserAuthentication:
         self.browser.element('#header').should(have.text(value))
 
     @allure.step('Entering account information.')
-    def enter_account_information(self, admin: User):
+    def enter_account_information(self, user: User):
         self.should_be_visible_enter_account_information()
         self.pick_gender()
-        self.create_password(admin.password)
-        self.fill_in_date_of_birth(admin.date_of_birth)
+        self.create_password(user.password)
+        self.fill_in_date_of_birth(user.date_of_birth)
         self.select_checkbox_newsletter()
         self.select_checkbox_offers()
-        self.fill_in_first_name(admin.first_name)
-        self.fill_in_last_name(admin.last_name)
-        self.fill_in_company(admin.company)
-        self.fill_in_address(admin.address)
-        self.pick_country(admin.country)
-        self.fill_in_state(admin.state)
-        self.fill_in_city(admin.city)
-        self.fill_in_zip_code(admin.zip_code)
-        self.fill_in_mobile_number(admin.mobile_number)
+        self.fill_in_first_name(user.first_name)
+        self.fill_in_last_name(user.last_name)
+        self.fill_in_company(user.company)
+        self.fill_in_address(user.address)
+        self.pick_country(user.country)
+        self.fill_in_state(user.state)
+        self.fill_in_city(user.city)
+        self.fill_in_zip_code(user.zip_code)
+        self.fill_in_mobile_number(user.mobile_number)
         self.click_button_create_account()
         self.should_be_visible_account_created()
         self.click_continue_button()
-        self.close_ad_if_present(admin.login)
+        self.close_ad_if_present(user.login)
 
+    # @pytest.mark.parametrize
     @allure.step('Signing in an user.')
-    def signin_user(self, admin: User):
+    def signin_user(self, user: User):
         self.click_auth_link()
         self.should_be_visible_signin_form()
-        self.fill_in_email_signin(admin.email)
-        self.fill_in_login_password(admin.password)
+        self.fill_in_email_signin(user.email)
+        self.fill_in_login_password(user.password)
         self.click_signin_button()
 
     @allure.step('Deleting the account.')

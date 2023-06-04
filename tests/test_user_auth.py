@@ -1,6 +1,7 @@
 import allure
+import pytest
 from allure_commons.types import Severity
-from data.users import admin
+from data.users import admin, users
 from page_objects.user_authentication import UserAuthentication
 
 from tests.constants import URL
@@ -11,15 +12,15 @@ from tests.constants import URL
 @allure.severity(Severity.CRITICAL)
 @allure.label('owner', 'mr spock')
 @allure.link(URL, name='Automation Exercise')
-def test_register_user(browser_management):
+@pytest.mark.parametrize('user', users)
+def test_register_user(browser_management, user):
     browser = browser_management
     user_signup = UserAuthentication(browser)
 
     user_signup.open_and_verify_home_page()
-    user_signup.signup_new_user(admin)
-    user_signup.enter_account_information(admin)
-    user_signup.should_be_visible_login(admin.login)
-    # user_signup.delete_account()
+    user_signup.signup_new_user(user)
+    user_signup.enter_account_information(user)
+    user_signup.should_be_visible_login(user.login)
 
 
 @allure.tag('Test Case 2')
@@ -27,11 +28,12 @@ def test_register_user(browser_management):
 @allure.severity(Severity.CRITICAL)
 @allure.label('owner', 'mr spock')
 @allure.link(URL, name='Automation Exercise')
-def test_login_with_correct_credentials(browser_management):
+@pytest.mark.parametrize('user', users)
+def test_login_with_correct_credentials(browser_management, user):
     browser = browser_management
     user_login = UserAuthentication(browser)
 
     user_login.open_and_verify_home_page()
-    user_login.signin_user(admin)
-    user_login.should_be_visible_login(admin.login)
+    user_login.signin_user(user)
+    user_login.should_be_visible_login(user.login)
     user_login.delete_account()

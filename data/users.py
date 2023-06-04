@@ -22,7 +22,7 @@ class User:
 admin = User(
     login='mrspock',
     email='hello113@enterprise.com',
-    password=os.getenv('USER_PASSWORD'),
+    password=os.getenv('ADMIN_PASSWORD'),
     date_of_birth=['13', '5', '1985'],
     first_name='Mr',
     last_name='Spock',
@@ -34,3 +34,21 @@ admin = User(
     zip_code='2000',
     mobile_number='045678901'
 )
+
+manager = User(
+    login='johndoe',
+    email='johndoe@enterprise.com',
+    password=os.getenv('MANAGER_PASSWORD'),
+    date_of_birth=['11', '3', '1997'],
+    first_name='John',
+    last_name='Doe',
+    company='Enterprise',
+    address='Colin avenue 13',
+    country='Australia',
+    state='NSW',
+    city='Sydney',
+    zip_code='2000',
+    mobile_number='045678945'
+)
+
+users = [admin, manager]
