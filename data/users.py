@@ -21,7 +21,7 @@ class User:
 
 admin = User(
     login='mrspock',
-    email='spock3@enterprise.com',
+    email='spock5@enterprise.com',
     password=os.getenv('ADMIN_PASSWORD'),
     date_of_birth=['13', '5', '1985'],
     first_name='Mr',
@@ -37,7 +37,7 @@ admin = User(
 
 manager = User(
     login='johndoe',
-    email='johndoe3@enterprise.com',
+    email='johndoe5@enterprise.com',
     password=os.getenv('MANAGER_PASSWORD'),
     date_of_birth=['11', '3', '1997'],
     first_name='John',
